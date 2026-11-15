@@ -28,7 +28,7 @@ const productController = (
             }
         );
         res.end(JSON.stringify({
-            message: "Product retrived successfully",
+            message: "Products retrived successfully",
             data: products,
         }))
          
@@ -44,6 +44,20 @@ const productController = (
         res.end(JSON.stringify({
             message: "Product retrived successfully",
             data: product,
+        }))
+        } else if (method === "POST" && url === "/products") {
+
+
+            const body = req.
+
+             res.writeHead(201, 
+            {
+                "Content-Type": "application/json"
+            }
+        );
+        res.end(JSON.stringify({
+            message: "Product Created successfully",
+            // data: products,
         }))
         }
 
