@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "http";
 import { createProduct, productService } from "../service/product.service";
 import type { IProduct } from "../types/product";
 import { bodyParser } from '../utils/parseBody';
+import { sendResponse } from "../utils/sendREsponse";
 
 const productController = async (
     req: IncomingMessage,
@@ -21,17 +22,12 @@ const productController = async (
         // Get All Products
         if(url === "/products" && method === "GET") {
 
-            const products = productService();
-
-           res.writeHead(200, 
-            {
-                "Content-Type": "application/json"
-            }
-        );
-        res.end(JSON.stringify({
-            message: "Products retrived successfully",
-            data: products,
-        }))
+             try {
+      const products = productService();
+      sendResponse(res, true, 200, "Products retrived successfully!", products);
+    } catch (error) {
+      sendResponse(res, false, 500, "Internal server error");
+    }
          
         } else if (method === "GET" && id !== null) {
              const products = productService();
