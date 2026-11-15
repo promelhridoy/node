@@ -1,8 +1,9 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { productService } from "../service/product.service";
 import type { IProduct } from "../types/product";
+import { bodyParser } from '../utils/parseBody';
 
-const productController = (
+const productController = async (
     req: IncomingMessage,
      res: ServerResponse
     ) => {
@@ -48,7 +49,9 @@ const productController = (
         } else if (method === "POST" && url === "/products") {
 
 
-            const body = req.
+            const body = await bodyParser(req);
+            console.log(body);
+            
 
              res.writeHead(201, 
             {
